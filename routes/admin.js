@@ -8,9 +8,9 @@ const model = require('../models/index');
 const admin = model.admin
 
 //import auth
-// const auth = require("../auth")
-// const jwt = require("jsonwebtoken")
-// const SECRET_KEY = "BelajarNodeJSItuMenyengankan"
+const auth = require("../auth")
+const jwt = require("jsonwebtoken")
+const SECRET_KEY = "BelajarNodeJSItuMenyengankan"
 
 //implementasi
 const app = express();
@@ -58,7 +58,7 @@ app.post("/", (req,res) => {
 
 //endpoint mengupdate data admin, METHOD: PUT, function: update
 
-app.put("/:id", (req,res)=> {
+app.put("/:id", auth, (req,res)=> {
     let param = {
         id_admin : req.params.id 
     }
@@ -102,32 +102,32 @@ app.delete("/:id", (req,res) => {
     })
 })
 
-// //endpoint login admin (authentication), METHOD: POST, Function: findOne
-// app.post("/auth", async (req,res) => {
-//     let data = {
-//         username_admin : req.body.username_admin,
-//         password_admin : md5(req.body.password_admin)
-//     }
+//endpoint login admin (authentication), METHOD: POST, Function: findOne
+app.post("/auth", async (req,res) => {
+    let data = {
+        username_admin : req.body.username_admin,
+        password_admin : md5(req.body.password_admin)
+    }
 
-//     let result = await admin.findOne({where: data})
-//     if (result) {
-//         //set payload from data
-//         let payload = JSON.stringify(result)
-//         //generete token based on payload and SECRET_KEY
-//         let token = jwt.sign(payload, SECRET_KEY)
+    let result = await admin.findOne({where: data})
+    if (result) {
+        //set payload from data
+        let payload = JSON.stringify(result)
+        //generete token based on payload and SECRET_KEY
+        let token = jwt.sign(payload, SECRET_KEY)
 
-//         res.json({
-//             logged: true,
-//             data: result,
-//             token: token 
-//         })
-//     }
-//     else {
-//         res.json({
-//             logged: false,
-//             massage: "Invalid Username or Password"
-//         })
-//     }
-// })
+        res.json({
+            logged: true,
+            data: result,
+            token: token 
+        })
+    }
+    else {
+        res.json({
+            logged: false,
+            massage: "Invalid Username or Password"
+        })
+    }
+})
 
 module.exports = app

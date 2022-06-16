@@ -18,6 +18,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 //endpoint menampilkann semua data admin, METHOD: GET, function: findALL()
+
 app.get("/", (req,res)=> {
     admin.findAll()
     .then(admin => {

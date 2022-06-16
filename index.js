@@ -12,6 +12,10 @@ app.use(express.static(__dirname))
 const admin = require('./routes/admin');
 app.use("/admin", admin)
 
+//endpoint admin
+const pendaftaran = require('./routes/pendaftaran');
+app.use("/pendaftaran", pendaftaran)
+
 //run sarver
 app .listen(8000, ()=>{
     console.log('server run on port 8000')

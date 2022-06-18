@@ -12,9 +12,13 @@ app.use(express.static(__dirname))
 const admin = require('./routes/admin');
 app.use("/admin", admin)
 
-//endpoint admin
+//endpoint pendaftaran
 const pendaftaran = require('./routes/pendaftaran');
 app.use("/pendaftaran", pendaftaran)
+
+//endpoint pelamar
+const pelamar = require('./routes/pelamar');
+app.use("/pelamar", pelamar)
 
 //run sarver
 app .listen(8000, ()=>{

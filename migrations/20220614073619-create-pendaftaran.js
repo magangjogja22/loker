@@ -22,13 +22,6 @@ module.exports = {
           key: "id_admin"
         }
       },
-      id_admin_super: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "admin_super",
-          key: "id_admin_super"
-        }
-      },
       id_loker: {
         type: Sequelize.INTEGER,
         references: {
